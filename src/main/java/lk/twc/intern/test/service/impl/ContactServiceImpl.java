@@ -35,7 +35,17 @@ public class ContactServiceImpl implements ContactService {
         Contact contact = modelMapper.map(contactTO, Contact.class);
         contact.setUser(existUser.get());
         contactRepository.save(contact);
-
         return contactTO;
+    }
+
+    @Override
+    public void deleteContact(Long id) {
+        Optional<Contact> existContact = contactRepository.findById(id);
+
+        System.out.println(existContact);
+        if (existContact.isEmpty()) {
+            throw new IllegalArgumentException("User not found");
+        }
+        contactRepository.deleteById(id);
     }
 }

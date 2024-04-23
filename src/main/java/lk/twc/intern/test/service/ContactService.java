@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface ContactService {
 ContactTO saveContact(ContactTO contactTO);
+void deleteContact(Long id);
 
 }
