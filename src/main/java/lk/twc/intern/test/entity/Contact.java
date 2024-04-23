@@ -30,6 +30,6 @@ public class Contact {
     private String number;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false,referencedColumnName = "id")
+    @JoinColumn(name = "user", nullable = false,referencedColumnName = "id")
     private User user;
 }

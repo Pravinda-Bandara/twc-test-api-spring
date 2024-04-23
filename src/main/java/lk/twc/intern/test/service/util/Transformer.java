@@ -7,7 +7,6 @@ import lk.twc.intern.test.to.UserTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
-
 @Component
 public class Transformer {
 
@@ -18,19 +17,18 @@ public class Transformer {
     }
 
     public User fromUserTO(UserTO userTO){
-        User user = mapper.map(userTO, User.class);
-        return user;
+        return mapper.map(userTO, User.class);
     }
 
-    public Contact fromContactTO(ContactTO lecturerTO){
-        Contact contact = mapper.map(lecturerTO, Contact.class);
-        return contact;
+    public Contact fromContactTO(ContactTO contactTO){
+        return mapper.map(contactTO, Contact.class);
     }
 
-    public UserTO toLecturerTO(User lecturer){
-        return mapper.map(lecturer, UserTO.class);
+    public UserTO toUserTO(User user){
+        return mapper.map(user, UserTO.class);
     }
-    public ContactTO toLecturerTO(Contact lecturer){
-        return mapper.map(lecturer, ContactTO.class);
+
+    public ContactTO toContactTO(Contact contact){
+        return mapper.map(contact, ContactTO.class);
     }
 }
