@@ -1,0 +1,51 @@
+# Spring Boot specific
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# IDE (Eclipse, IntelliJ, NetBeans)
+.classpath
+.project
+.settings/
+.springBeans
+.factorypath
+
+# Gradle
+.gradle/
+build/
+
+# Maven
+log/
+target/
+*.iml
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# IDEs
+.idea/
+
+# Compiled class file
+*.class
+
+# Package files
+*.jar
+*.war
+*.ear
+
+# Maven specific
+/target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+
+# Other
+*.cache
+*.log
+
