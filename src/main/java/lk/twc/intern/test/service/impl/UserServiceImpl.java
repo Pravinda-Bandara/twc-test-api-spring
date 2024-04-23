@@ -3,6 +3,7 @@ package lk.twc.intern.test.service.impl;
 import lk.twc.intern.test.entity.User;
 import lk.twc.intern.test.repository.UserRepository;
 import lk.twc.intern.test.service.UserService;
+import lk.twc.intern.test.service.util.Transformer;
 import lk.twc.intern.test.to.UserTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -16,17 +17,19 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final ModelMapper modelMapper;
+    private final Transformer transformer;
 
-    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper) {
+
+    public UserServiceImpl(UserRepository userRepository, Transformer transformer) {
         this.userRepository = userRepository;
-        this.modelMapper = modelMapper;
+
+        this.transformer = transformer;
     }
 
     @Override
-    public UserTO saveUser(UserTO userTO) {
+    public Long saveUser(UserTO userTO) {
         // Map UserTO to User entity
-        User user = modelMapper.map(userTO, User.class);
+        User user = transformer.fromUserTO(userTO);
         System.out.println(user.getUserName());
 
         // Check if the username already exists
@@ -45,12 +48,12 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
 
         // Map the saved user back to UserTO and return
-        return modelMapper.map(user, UserTO.class);
+        return user.getId();
     }
 
 
     @Override
-    public UserTO getUser(UserTO userTO) {
+    public Long getUser(UserTO userTO) {
         // Find the user by username
         Optional<User> optionalUser = userRepository.findByUserName(userTO.getUserName());
 
@@ -67,7 +70,7 @@ public class UserServiceImpl implements UserService {
         }
 
         // Map the user to UserTO and return
-        return modelMapper.map(user, UserTO.class);
+        return user.getId();
     }
 
 }

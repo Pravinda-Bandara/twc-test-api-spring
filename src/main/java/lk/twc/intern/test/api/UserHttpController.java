@@ -17,21 +17,21 @@ public class UserHttpController {
     }
 
     @PostMapping(value = "/register",consumes = "application/json",produces = "application/json")
-    public ResponseEntity<UserTO> registerUser(@RequestBody UserTO userTO) {
+    public ResponseEntity<Long> registerUser(@RequestBody UserTO userTO) {
         try {
-            UserTO savedUser = userService.saveUser(userTO);
-            return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
+            Long savedUserId = userService.saveUser(userTO);
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedUserId);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
     }
 
     @PostMapping(value = "/login",consumes = "application/json",produces = "application/json")
-    public ResponseEntity<UserTO> loginUser(@RequestBody UserTO userTO) {
+    public ResponseEntity<Long> loginUser(@RequestBody UserTO userTO) {
         try {
 
-            UserTO authenticatedUser = userService.getUser(userTO);
-            return ResponseEntity.status(HttpStatus.OK).body(authenticatedUser);
+            Long authenticatedUserID = userService.getUser(userTO);
+            return ResponseEntity.status(HttpStatus.OK).body(authenticatedUserID);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
