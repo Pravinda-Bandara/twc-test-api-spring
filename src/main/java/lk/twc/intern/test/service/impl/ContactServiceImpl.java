@@ -12,7 +12,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -29,14 +31,19 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public ContactResponse saveContact(ContactTO contactTO) {
+        System.out.println(contactTO);
         Optional<User> existUser = userRepository.findById(contactTO.getUser());
+        System.out.println(existUser.get());
         if (existUser.isEmpty()) {
             throw new IllegalArgumentException("User not found");
         }
         Contact contact = transformer.fromContactTO(contactTO);
+        System.out.println(contact);
         contact.setUser(existUser.get());
+        System.out.println(contact);
         contactRepository.save(contact);
         ContactResponse contactResponse=transformer.toContactResponse(contact);
+        System.out.println(contactResponse);
         return contactResponse;
     }
 
@@ -54,11 +61,8 @@ public class ContactServiceImpl implements ContactService {
 
 
     @Override
-    public void updateContact(ContactTO contactTO, Long contactID) {
-        Optional<User> existUser = userRepository.findById(contactTO.getUser());
-        if (existUser.isEmpty()) {
-            throw new IllegalArgumentException("User not found");
-        }
+    public ContactResponse updateContact(ContactTO contactTO, Long contactID) {
+
         Optional<Contact> existContact = contactRepository.findById(contactID);
         if (existContact.isEmpty()) {
             throw new IllegalArgumentException("Contact not found");
@@ -68,5 +72,20 @@ public class ContactServiceImpl implements ContactService {
         contact.setEmail(contactTO.getEmail());
         contact.setGender(contactTO.getGender());
         contact.setNumber(contactTO.getNumber());
+        ContactResponse contactResponse = transformer.toContactResponse(contact);
+        return contactResponse;
+    }
+
+
+    @Override
+    public List<ContactResponse> getContacts(Long userID) {
+        Optional<User> existUser = userRepository.findById(userID);
+        if (existUser.isEmpty()) {
+            throw new IllegalArgumentException("User not found");
+        }
+        List<Contact> contacts = contactRepository.findByUserId(userID);
+        return contacts.stream()
+                .map(transformer::toContactResponse)
+                .collect(Collectors.toList());
     }
 }

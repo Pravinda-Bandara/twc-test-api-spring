@@ -27,6 +27,5 @@ public class ContactTO implements Serializable {
     @NotBlank(message = "Number can't be empty")
     private String number;
 
-    @Null(message = "User should be empty")
     private Long user;
 }

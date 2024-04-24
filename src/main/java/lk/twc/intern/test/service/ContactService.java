@@ -10,6 +10,7 @@ public interface ContactService {
     ContactResponse saveContact(ContactTO contactTO);
 void deleteContact(Long id);
 
-void updateContact(ContactTO contactTO,Long contactID);
+ContactResponse updateContact(ContactTO contactTO,Long contactID);
+List<ContactResponse> getContacts(Long userID);
 
 }

@@ -5,6 +5,7 @@ import lk.twc.intern.test.entity.User;
 import lk.twc.intern.test.to.ContactTO;
 import lk.twc.intern.test.to.UserTO;
 import lk.twc.intern.test.type.ContactResponse;
+import lk.twc.intern.test.type.UserResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
@@ -33,7 +34,12 @@ public class Transformer {
         return mapper.map(contact, ContactTO.class);
     }
     public ContactResponse toContactResponse(Contact contact){
-        return mapper.map(contact, ContactResponse.class);
+        ContactResponse contactResponse = mapper.map(contact, ContactResponse.class);
+        contactResponse.set_id(contact.getId());
+        return contactResponse;
+    }
+    public UserResponse toUserResponse(Long id){
+        return mapper.map(id, UserResponse.class);
     }
 
 }

@@ -9,12 +9,6 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class ContactResponse implements Serializable {
-    private Long _id;
-    private String name;
-    private String email;
-    private String gender;
-    private String number;
-
-
+public class UserResponse implements Serializable {
+    private Long userId;
 }

@@ -5,6 +5,7 @@ import lk.twc.intern.test.repository.UserRepository;
 import lk.twc.intern.test.service.UserService;
 import lk.twc.intern.test.service.util.Transformer;
 import lk.twc.intern.test.to.UserTO;
+import lk.twc.intern.test.type.UserResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Long saveUser(UserTO userTO) {
+    public UserResponse saveUser(UserTO userTO) {
         // Map UserTO to User entity
         User user = transformer.fromUserTO(userTO);
         System.out.println(user.getUserName());
@@ -46,14 +47,19 @@ public class UserServiceImpl implements UserService {
 
         // Save the user
         userRepository.save(user);
+        System.out.println("awd");
+        System.out.println(user.getId());
+        System.out.println("awd");
 
         // Map the saved user back to UserTO and return
-        return user.getId();
+        UserResponse userResponse = new UserResponse(user.getId());
+        System.out.println(userResponse);
+        return userResponse;
     }
 
 
     @Override
-    public Long getUser(UserTO userTO) {
+    public UserResponse getUser(UserTO userTO) {
         // Find the user by username
         Optional<User> optionalUser = userRepository.findByUserName(userTO.getUserName());
 
@@ -69,8 +75,8 @@ public class UserServiceImpl implements UserService {
             throw new IllegalArgumentException("Invalid username or password");
         }
 
-        // Map the user to UserTO and return
-        return user.getId();
+        UserResponse userResponse = new UserResponse(user.getId());
+        return userResponse;
     }
 
 }
