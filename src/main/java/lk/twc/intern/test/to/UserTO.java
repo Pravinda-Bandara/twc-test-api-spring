@@ -1,13 +1,11 @@
 package lk.twc.intern.test.to;
 
+import java.io.Serializable;
+
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Null;
-import javax.validation.constraints.Pattern;
-import java.io.Serializable;
 
 @Data
 @NoArgsConstructor

@@ -1,5 +1,13 @@
 package lk.twc.intern.test.service.impl;
 
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
+
+import jakarta.transaction.Transactional;
 import lk.twc.intern.test.entity.Contact;
 import lk.twc.intern.test.entity.User;
 import lk.twc.intern.test.repository.ContactRepository;
@@ -8,13 +16,7 @@ import lk.twc.intern.test.service.ContactService;
 import lk.twc.intern.test.service.util.Transformer;
 import lk.twc.intern.test.to.ContactTO;
 import lk.twc.intern.test.type.ContactResponse;
-import org.modelmapper.ModelMapper;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional

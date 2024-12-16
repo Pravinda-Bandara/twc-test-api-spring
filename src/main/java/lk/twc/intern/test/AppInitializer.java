@@ -8,12 +8,12 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class AppInitializer {
     @Bean
-    public ModelMapper mapper(){
+    public ModelMapper mapper() {
         return new ModelMapper();
     }
 
     public static void main(String[] args) {
         SpringApplication.run(AppInitializer.class, args);
-        System.out.println("Project work");
+        System.out.println("Project");
     }
 }
